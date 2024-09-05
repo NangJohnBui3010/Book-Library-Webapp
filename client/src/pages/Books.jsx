@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import axios from "axios"
 import { Link } from 'react-router-dom';
 import GoToButton from '../components/GoToButton';
-
 export default function Books(){
     const [books,setBooks] = useState([])
     const handleDelete = async (id) =>{
@@ -30,7 +29,7 @@ export default function Books(){
 
     return(
         <div>
-            <h1>Nang Bui Book Library</h1>
+            <h1>Your library</h1>
             <div className = "books">
                 {books.map(book=>(
                     <div className = "book">
