@@ -43,7 +43,7 @@ export default function BookStore(){
                 {
                     bookData.docs.map(book => (
                         <div className = "book-from-bookstore">
-                            {book.cover && <img src={book.cover} alt=""></img>}
+                            <img className = "book-thumbnail" src={`https://covers.openlibrary.org/b/olid/${book.cover_edition_key}-M.jpg`} alt=""></img>
                             <h2>{book.title}</h2>
                             <h3>Author: {book.author_name}</h3>
                         </div>
