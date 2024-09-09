@@ -1,26 +1,36 @@
 import React from "react";
 import { useState } from "react";
+import { useEffect } from "react";
 export default function BookStore(){
     const [searchQuery, setSearchQuery] = useState("");
     const [bookData, setBookData] = useState(null);
     const [loading, setLoading] = useState(false);
-    function keyHandle(event){
-        if(event.key ==="Enter"){
-            setLoading(true);
-            try{
-                const fetchData = async() => {
-                    const query = searchQuery;
-                    console.log(searchQuery);
-                    const response = await fetch(`https://openlibrary.org/search.json?q=${query.split(" ").join("+")}`);
-                    setBookData(await response.json());
-                    setLoading(false);
-                }
-                fetchData();
-            }catch(err){
-                console.log(err);
-            }
+    
+    async function fetchData() {
+        setLoading(true);
+        try {
+            const query = searchQuery;
+            console.log(searchQuery);
+            const response = await fetch(`https://openlibrary.org/search.json?q=${query.split(" ").join("+")}`);
+            const data = await response.json();
+            setBookData(data);
+        } catch (err) {
+            console.log(err);
+        } finally {
+            setLoading(false);
         }
     }
+
+    function keyHandle(event){
+        if(event.key ==="Enter"){
+            fetchData();
+        }
+    }
+
+    useEffect(() => {
+        console.log('Loading state changed:', loading);
+    }, [loading]);
+
     return(
         <div className = "book-store-page">
             <div className = "navigation-bar">
@@ -35,7 +45,7 @@ export default function BookStore(){
                 <button className = "category-browse-button">Browse by category</button>
                 <button className = "your-library-button">Your library</button>
             </div>
-
+            {/*<h1>Loading results</h1>*/}
             {loading && <h1>Loading results</h1>}
 
             {!loading && bookData && 
@@ -51,7 +61,6 @@ export default function BookStore(){
                 }
             </div>
             }
-
         </div>
     )
 }
