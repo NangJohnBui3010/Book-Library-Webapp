@@ -16,7 +16,7 @@ import BookStore from './pages/BookStore';
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
+      <BrowserRouter basename="/Book-Library-Webapp">
         <Routes>
           <Route path = "/" element = {<BookStore/>}/>
           <Route path = "/library" element = {<Books/>}/>
