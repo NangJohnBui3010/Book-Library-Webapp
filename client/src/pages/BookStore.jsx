@@ -66,7 +66,7 @@ export default function BookStore(){
                             <p>Loading results...</p>
                         </div>
                     )}
-                    {!loading && !bookData && <div>
+                    {!loading && bookData && bookData.docs.length === 0 && <div>
                         <h2>No results found</h2>
                         <p>Try a different search term.</p>
                     </div>}
