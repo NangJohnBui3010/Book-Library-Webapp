@@ -56,7 +56,7 @@ export default function BookStore(){
                 <div className="welcome-section">
                     <h2>Welcome to the Book Store!</h2>
                     <p>Search for your favorite books, add them to your library, and mark them as favorites.</p>
-                    <p>Get started by entering a search term above.</p>
+                    <p>Get started by entering a search term above. (Ex: "Harry Potter")</p>
                 </div>
             ) : (
                 <>
@@ -66,7 +66,10 @@ export default function BookStore(){
                             <p>Loading results...</p>
                         </div>
                     )}
-
+                    {!loading && !bookData && <div>
+                        <h2>No results found</h2>
+                        <p>Try a different search term.</p>
+                    </div>}
                     {!loading && bookData && 
                     <div className = "book-shelf">
                         {
